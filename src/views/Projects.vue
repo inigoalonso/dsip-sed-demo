@@ -4,12 +4,13 @@
 
     <v-container class="my-5">
       <v-expansion-panels>
-        <v-expansion-panel v-for="project in myProjects" :key="project.title">
+        <v-expansion-panel v-for="project in projects" :key="project.title">
           <v-expansion-panel-header class="py-1">{{ project.title }}</v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-card-text class="px-4 grey--text">
-              <div class="font-weight-bold">Due by {{ project.due }}</div>
-              <div>{{ project.description }}</div>
+              <p><span class="font-weight-bold">Owner</span> {{ project.person }}</p>
+              <p><span class="font-weight-bold">Status</span> {{ project.status }}</p>
+              <p><span class="font-weight-bold">Description</span> {{ project.description }}</p>
             </v-card-text>
           </v-expansion-panel-content>
         </v-expansion-panel>
@@ -32,7 +33,7 @@ export default {
   computed: {
     myProjects() {
       return this.projects.filter(project => {
-        return project.person === 'The Net Ninja' && project.status != 'complete'
+        return project.person === 'aaaa' && project.status != 'complete'
       })
     }
   },
