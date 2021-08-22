@@ -4,13 +4,13 @@ import 'firebase/firestore'
 
   // Your web app's Firebase configuration
   var firebaseConfig = {
-    apiKey: "AIzaSyBjta-SWJ-XsMvvDHHlM2WwgTTW1cib9rs",
-    authDomain: "efm-tool.firebaseapp.com",
-    databaseURL: "https://efm-tool.firebaseio.com",
-    projectId: "efm-tool",
-    storageBucket: "efm-tool.appspot.com",
-    messagingSenderId: "22978628425",
-    appId: "1:22978628425:web:724021813105a99d"
+    //databaseURL: "https://dsipdemo.firebaseio.com",
+    apiKey: "AIzaSyDN5cYxDvw7iryDV2MCWtHVp0fY8BgcVK0",
+    authDomain: "dsipdemo.firebaseapp.com",
+    projectId: "dsipdemo",
+    storageBucket: "dsipdemo.appspot.com",
+    messagingSenderId: "554990160161",
+    appId: "1:554990160161:web:9dbcd560d6a47486f81660"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);

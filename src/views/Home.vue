@@ -8,7 +8,8 @@
           class="font-weight-thin"
           style="min-height: 300px;"
         >
-          EFM Tool helps product design teams succeed
+          <span class="font-weight-regular">DSIP Demo</span> 
+          SED Lab approach to digitalization of product development tools
         </v-row>
         <v-row>
           <v-btn v-if="userLogedIn()" class="ma-2" router to="Dashboard" color="success" dark large rounded>Get started</v-btn>

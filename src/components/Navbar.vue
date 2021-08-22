@@ -1,8 +1,8 @@
 <template>
   <nav>
 
-    <v-app-bar text app class="elevation-0 grey lighten-5">
-      <v-app-bar-nav-icon v-if="userLogedIn()" @click="drawer = !drawer" class="grey--text"></v-app-bar-nav-icon>
+    <v-app-bar text app dark class="elevation-0 green">
+      <v-app-bar-nav-icon v-if="userLogedIn()" @click="drawer = !drawer" class="white--text"></v-app-bar-nav-icon>
       <router-link :to="{ name: 'Home' }">
         <v-img
           class="mx-2"
@@ -14,22 +14,22 @@
       </router-link>
       <v-toolbar-title class="toolbar-title text-uppercase">
         <router-link :to="{ name: 'Home' }">
-          <span class="grey--text">E-FM</span>
-          <span class="grey--text font-weight-light">TOOL{{ this.$store.user }}</span>
+          <span class="white--text">DSIP</span>
+          <span class="white--text font-weight-light">DEMO{{ this.$store.user }}</span>
         </router-link>
       </v-toolbar-title>
       
       <v-spacer></v-spacer>
       
-      <v-btn v-if="!userLogedIn()" text color="grey" :to="{ path: '/signup'}" append>
+      <v-btn v-if="!userLogedIn()" text color="white" :to="{ path: '/signup'}" append>
         <span>Sign Up</span>
         <v-icon right>mdi-account-plus</v-icon>
       </v-btn>
-      <v-btn v-if="!userLogedIn()" text color="grey" :to="{ path: '/login'}" append>
+      <v-btn v-if="!userLogedIn()" text color="white" :to="{ path: '/login'}" append>
         <span>Login</span>
         <v-icon right>mdi-login</v-icon>
       </v-btn>
-      <v-btn v-if="userLogedIn()" text color="grey" @click="logout">
+      <v-btn v-if="userLogedIn()" text color="white" @click="logout">
         <span>Logout</span>
         <v-icon right>mdi-logout</v-icon>
       </v-btn>
@@ -77,14 +77,14 @@
               </template>
 
               <v-card>
-                  <v-card-title class="headline grey lighten-2" primary-title>
+                  <v-card-title class="headline green white--text" primary-title>
                       Terms
                   </v-card-title>
 
                   <v-card-text>
                     <p></p>
                     <p>Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern our relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.</p>
-                    <p>The term 'EFM Tool' or 'us' or 'we' refers to the owner of the website. The term 'you' refers to the user or viewer of our website.</p>
+                    <p>The term 'DSIPDEMO' or 'us' or 'we' refers to the owner of the website. The term 'you' refers to the user or viewer of our website.</p>
                     <p>The use of this website is subject to the following terms of use:</p>
                     <ul>
                       <li>
@@ -132,7 +132,7 @@
               </template>
 
               <v-card>
-                  <v-card-title class="headline grey lighten-2" primary-title>
+                  <v-card-title class="headline green white--text" primary-title>
                       Privacy Policy
                   </v-card-title>
 
