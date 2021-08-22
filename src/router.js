@@ -9,6 +9,8 @@ import Login from './components/auth/Login.vue'
 import ViewProfile from './components/profile/ViewProfile.vue'
 import ViewProject from './components/project/ViewProject.vue'
 import ViewProjectAlt from './components/project/ViewProjectAlt.vue'
+import ViewProjectDSIP from './components/project/ViewProjectDSIP.vue'
+import Mug from './components/Mug.vue'
 import Docs from './components/documentation/Docs.vue'
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -81,6 +83,30 @@ const router = new Router({
       path: '/projectAlt/:id',
       name: 'ViewProjectAlt',
       component: ViewProjectAlt,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/projectDSIP/:id',
+      name: 'ViewProjectDSIP',
+      component: ViewProjectDSIP,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/mug/:id',
+      name: 'Mug',
+      component: Mug,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/mug',
+      name: 'NewMug',
+      component: Mug,
       meta: {
         requiresAuth: true
       }

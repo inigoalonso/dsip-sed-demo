@@ -107,7 +107,7 @@ export default {
       this.projects.sort((a,b) => a[prop] < b[prop] ? -1 : 1)
     },
     goToProject(id) {
-      this.$router.push({ name: 'ViewProject', params: { id: id } });
+      this.$router.push({ name: 'ViewProjectDSIP', params: { id: id } });
     }
   },
   computed: {
