@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import auth from './auth'
 import project from './project'
 import diagram from './diagram'
+import mug from './mug'
 
 Vue.use(Vuex);
 
@@ -11,6 +12,7 @@ export const store = new Vuex.Store({
     auth,
     project,
     diagram,
+    mug,
   },
   state: {
   },
