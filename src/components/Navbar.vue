@@ -33,6 +33,10 @@
         <span>Logout</span>
         <v-icon right>mdi-logout</v-icon>
       </v-btn>
+      <v-btn text color="white" href="https://dsip-staging.web.app/">
+        <span>Toolbox</span>
+        <v-icon right>mdi-toolbox</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-navigation-drawer v-if="userLogedIn()" app v-model="drawer" class="secondary">
