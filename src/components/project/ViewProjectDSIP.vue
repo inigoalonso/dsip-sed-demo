@@ -31,10 +31,10 @@
             Criteria
           </v-tab>
           <v-tab>
-            E F-M
+            Design
           </v-tab>
           <v-tab>
-            Designs
+            Alternatives
           </v-tab>
         </v-tabs>
       </template>
@@ -94,50 +94,6 @@
       </v-tab-item>
       <v-tab-item>
         <Table/>
-<!--         <v-card flat>
-          <v-card-title>Performance</v-card-title>
-          <v-card-text>
-            <v-text-field
-              v-model="searchPerformanceRequirements"
-              append-icon="search"
-              label="Search"
-              single-line
-              hide-details
-            ></v-text-field>
-            <v-data-table
-              :headers="headersPerformanceRequirements"
-              :items="performanceRequirements"
-              :items-per-page="10"
-              single-select
-              item-key="name"
-              show-select
-              :search="searchPerformanceRequirements"
-              class="elevation-0"
-            ></v-data-table>
-          </v-card-text>
-        </v-card>
-        <v-card flat>
-          <v-card-title>Sustainability</v-card-title>
-          <v-card-text>
-            <v-text-field
-              v-model="searchSustainabilityRequirements"
-              append-icon="search"
-              label="Search"
-              single-line
-              hide-details
-            ></v-text-field>
-            <v-data-table
-              :headers="headersSustainabilityRequirements"
-              :items="sustainabilityRequirements"
-              :items-per-page="10"
-              single-select
-              item-key="name"
-              show-select
-              :search="searchSustainabilityRequirements"
-              class="elevation-0"
-            ></v-data-table>
-          </v-card-text>
-        </v-card> -->
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
@@ -145,57 +101,6 @@
           <v-card-text>
             TODO
           </v-card-text>
-        </v-card>
-      </v-tab-item>
-      <v-tab-item>
-        <v-card
-          max-width="1280"
-          class="mx-auto my-3"
-        >
-          <v-card-title>Collected designs</v-card-title>
-          <v-card-text>
-            <v-simple-table>
-              <thead>
-                <tr>
-                  <!-- <th class="text-center">H1</th>
-                  <th class="text-center">D1</th>
-                  <th class="text-center">D2</th>
-                  <th class="text-center">T1</th>
-                  <th class="text-center">T2</th>
-                  <th class="text-center">S1</th> -->
-                  <th class="text-center">Handle</th>
-                  <th class="text-center">Material</th>
-                  <th class="text-center">Volume</th>
-                  <th class="text-center">Weight</th>
-                  <th class="text-center">Timestamp</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="item in designs" :key="item.uuid">
-                  <!-- <td>{{ item.height }}</td>
-                  <td>{{ item.diameterTop }}</td>
-                  <td>{{ item.diameterBottom }}</td>
-                  <td>{{ item.mugThickness }}</td>
-                  <td>{{ item.handleThickness }}</td>
-                  <td>{{ item.handleSeparation }}</td> -->
-                  <td>{{ item.handle }}</td>
-                  <td>{{ item.material }}</td>
-                  <td>{{ item.volume }}</td>
-                  <td>{{ item.weight }}</td>
-                  <td>{{ item.createdOn.seconds }}</td>
-                </tr>
-              </tbody>
-            </v-simple-table>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn
-              color="green"
-              text
-              @click="createMug"
-            >
-              Create new
-            </v-btn>
-          </v-card-actions>
         </v-card>
         <v-card
           max-width="1280"
@@ -206,6 +111,102 @@
             <Mug/>
           </v-card-text>
         </v-card>
+      </v-tab-item>
+      <v-tab-item>
+        <v-row>
+          <v-col cols="6">
+            <v-card>
+              <v-card-title>
+                <span class="text-h5">Heatmap</span>
+              </v-card-title>
+
+              <v-card-text>
+                <div id="heatmapChart">
+                  <apexchart type="heatmap" height="400" :options="heatmapChartOptions" :series="series"></apexchart>
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col cols="6">
+            <v-card>
+              <v-card-title>
+                <span class="text-h5">Radar chart</span>
+              </v-card-title>
+
+              <v-card-text>
+                <div id="radarChart">
+                  <apexchart type="radar" height="400" :options="radarChartOptions" :series="series"></apexchart>
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col cols="6">
+            <v-card>
+              <v-card-title>
+                <span class="text-h5">Scatter chart</span>
+              </v-card-title>
+
+              <v-card-text>
+                <div id="scatterChart">
+                  <apexchart type="scatter" height="350" :options="scatterChartOptions" :series="series"></apexchart>
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col cols="6">
+            <v-card
+              max-width="1280"
+              class="mx-auto my-3"
+            >
+              <v-card-title>Collected designs</v-card-title>
+              <v-card-text>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <!-- <th class="text-center">H1</th>
+                      <th class="text-center">D1</th>
+                      <th class="text-center">D2</th>
+                      <th class="text-center">T1</th>
+                      <th class="text-center">T2</th>
+                      <th class="text-center">S1</th> -->
+                      <th class="text-center">Handle</th>
+                      <th class="text-center">Material</th>
+                      <th class="text-center">Volume</th>
+                      <th class="text-center">Weight</th>
+                      <th class="text-center">Timestamp</th>
+                      <th class="text-center">Creator</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="item in designs" :key="item.uuid">
+                      <!-- <td>{{ item.height }}</td>
+                      <td>{{ item.diameterTop }}</td>
+                      <td>{{ item.diameterBottom }}</td>
+                      <td>{{ item.mugThickness }}</td>
+                      <td>{{ item.handleThickness }}</td>
+                      <td>{{ item.handleSeparation }}</td> -->
+                      <td>{{ item.handle }}</td>
+                      <td>{{ item.material }}</td>
+                      <td>{{ item.volume }}</td>
+                      <td>{{ item.weight }}</td>
+                      <td>{{ item.createdOn.seconds }}</td>
+                      <td>{{ item.creator }}</td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  color="green"
+                  text
+                  @click="createMug"
+                >
+                  Create new
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
       </v-tab-item>
     </v-tabs-items>
   <div class="view-project">
@@ -291,6 +292,114 @@ export default {
           weight: 3,
         },
       ],
+      series: [
+        {
+          name: "Performance",
+          data: [{
+            x: 'Option 1',
+            y: 22
+          }, {
+            x: 'Option 2',
+            y: 29
+          }, {
+            x: 'Option 3',
+            y: 3
+          }, {
+            x: 'Option 4',
+            y: 42
+          }]
+        },
+        {
+          name: "Sustainability",
+          data: [{
+            x: 'Option 1',
+            y: 21
+          }, {
+            x: 'Option 2',
+            y: 13
+          }, {
+            x: 'Option 3',
+            y: 43
+          }, {
+            x: 'Option 4',
+            y: 37
+          }]
+        },
+        {
+          name: "Overall",
+          data: [{
+            x: 'Option 1',
+            y: 43
+          }, {
+            x: 'Option 2',
+            y: 42
+          }, {
+            x: 'Option 3',
+            y: 46
+          }, {
+            x: 'Option 4',
+            y: 79
+          }]
+        }
+      ],
+      heatmapChartOptions: {
+        chart: {
+          height: 450,
+          type: 'heatmap',
+        },
+        dataLabels: {
+          enabled: false
+        },
+        xaxis: {
+          type: 'category',
+          categories: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+          position: 'top'
+        },
+        grid: {
+          padding: {
+            right: 20
+          }
+        }
+      },
+      radarChartOptions: {
+        chart: {
+          height: 450,
+          type: 'radar',
+        },
+        dataLabels: {
+          enabled: false
+        },
+        xaxis: {
+          type: 'category',
+          categories: ['Option 1', 'Option 2', 'Option 3', 'Option 4']
+        },
+        grid: {
+          padding: {
+            right: 20
+          }
+        }
+      },
+      scatterChartOptions: {
+        chart: {
+          height: 350,
+          type: 'scatter',
+          zoom: {
+            enabled: true,
+            type: 'xy'
+          }
+        },
+        xaxis: {
+          tickAmount: 10,
+          labels: {
+            formatter: function(val) {
+              return parseFloat(val).toFixed(1)
+            }
+          }
+        },
+        yaxis: {
+          tickAmount: 7
+        }
+      },
     }
   },
   computed: {
