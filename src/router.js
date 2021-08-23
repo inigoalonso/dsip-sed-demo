@@ -73,22 +73,6 @@ const router = new Router({
     },
     {
       path: '/project/:id',
-      name: 'ViewProject',
-      component: ViewProject,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/projectAlt/:id',
-      name: 'ViewProjectAlt',
-      component: ViewProjectAlt,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/projectDSIP/:id',
       name: 'ViewProjectDSIP',
       component: ViewProjectDSIP,
       meta: {
