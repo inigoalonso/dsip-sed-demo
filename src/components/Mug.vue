@@ -516,6 +516,9 @@ import router from '@/router'
       }
     },
     computed: {
+      project () {
+        return this.$store.getters.project
+      },
       mug () {
         return this.$store.getters.mug
       },
@@ -747,6 +750,7 @@ import router from '@/router'
           volume: this.mugVolume,
           weight: this.mugWeight,
           createdOn: new Date(),
+          creator: this.userName(),
         }
         this.overlay = !this.overlay
         this.uploading = true
@@ -759,6 +763,14 @@ import router from '@/router'
           //console.log(error)
           this.error = error
         })
+      },
+      userName () {
+        let user = this.$store.getters.user
+        try {
+          return user.name
+        } catch {
+          return ''
+        }
       },
     },
     created(){
