@@ -516,8 +516,10 @@ import router from '@/router'
       }
     },
     computed: {
-      project () {
-        return this.$store.getters.project
+      projectId () {
+        var projectId = this.$store.getters.project.id
+        console.log(projectId)
+        return projectId
       },
       mug () {
         return this.$store.getters.mug
@@ -751,6 +753,7 @@ import router from '@/router'
           weight: this.mugWeight,
           createdOn: new Date(),
           creator: this.userName(),
+          projectId: this.projectId,
         }
         this.overlay = !this.overlay
         this.uploading = true
