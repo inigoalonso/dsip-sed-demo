@@ -102,10 +102,7 @@
             TODO
           </v-card-text>
         </v-card>
-        <v-card
-          max-width="1280"
-          class="mx-auto my-3"
-        >
+        <v-card flat>
           <v-card-title>Create new</v-card-title>
           <v-card-text>
             <Mug/>
@@ -326,7 +323,7 @@ export default {
           }]
         },
         {
-          name: "Overall",
+          name: "Total",
           data: [{
             x: 'Option 1',
             y: 43

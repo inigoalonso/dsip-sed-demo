@@ -9,7 +9,7 @@ export default {
       this.mug = mug.data();
       if (!mug.exists) {
         console.log("mug does not exist")
-        router.push('/mug');
+        //router.push('/mug');
       } else {
         commit('setMug', { ...mug.data(), ...{id: mug.id}})
       }
