@@ -106,24 +106,16 @@
               <v-expansion-panel>
                 <v-expansion-panel-header>E F-M tree example</v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <img src="/efm.svg" alt="EFM of mug">
+                  <img src="/efm.svg" alt="EFM of mug" width="100%">
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
           </v-card-text>
         </v-card>
         <v-card flat>
-          <v-card-title>Create new</v-card-title>
+          <v-card-title>Create new design alternative</v-card-title>
           <v-card-text>
-            
-            <v-expansion-panels popout>
-              <v-expansion-panel>
-                <v-expansion-panel-header>Create new design alternative</v-expansion-panel-header>
-                <v-expansion-panel-content>
                   <Mug/>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
           </v-card-text>
         </v-card>
       </v-tab-item>
