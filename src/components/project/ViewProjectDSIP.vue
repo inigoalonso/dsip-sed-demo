@@ -261,19 +261,19 @@ export default {
       loadingProject: false,
       snackbarUpdatedProject: false,
       snackbarDeletedProject: false,
-      searchPerformanceRequirements: '',
-      searchSustainabilityRequirements: '',
-      headersPerformanceRequirements: [
+      searchPerformanceCriteria: '',
+      searchSustainabilityCriteria: '',
+      headersPerformanceCriteria: [
         { text: 'Name', value: 'name', align: 'left' },
         { text: 'Description', value: 'description' },
         { text: 'Weight', value: 'weight' },
       ],
-      headersSustainabilityRequirements: [
+      headersSustainabilityCriteria: [
         { text: 'Name', value: 'name', align: 'left' },
         { text: 'Description', value: 'description' },
         { text: 'Weight', value: 'weight' },
       ],
-      performanceRequirements: [
+      performanceCriteria: [
         {
           name: 'Keep heat',
           description: 'Maximize the time the drink is warm.',
@@ -290,7 +290,7 @@ export default {
           weight: 1,
         },
       ],
-      sustainabilityRequirements: [
+      sustainabilityCriteria: [
         {
           name: 'Amount of material',
           description: 'Minimize the amount of material used.',

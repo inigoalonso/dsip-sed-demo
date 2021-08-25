@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="requirements"
+    :items="criteria"
     sort-by="total"
     class="elevation-1"
   >
@@ -9,7 +9,7 @@
       <v-toolbar
         flat
       >
-        <v-toolbar-title>Requirements</v-toolbar-title>
+        <v-toolbar-title>Criteria</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -28,7 +28,7 @@
               v-bind="attrs"
               v-on="on"
             >
-              New Requirement
+              New Criterion
             </v-btn>
           </template>
           <v-card>
@@ -149,7 +149,7 @@
       dialogDelete: false,
       headers: [
         {
-          text: 'Requirement',
+          text: 'Criterion',
           align: 'start',
           sortable: false,
           value: 'name',
@@ -159,7 +159,7 @@
         { text: 'Weight', value: 'weight' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
-      requirements: [],
+      criteria: [],
       editedIndex: -1,
       editedItem: {
         name: '',
@@ -197,7 +197,7 @@
 
     methods: {
       initialize () {
-        this.requirements = [
+        this.criteria = [
           {
             name: 'Keep heat',
             description: 'Maximize the time the drink is warm.',
@@ -244,19 +244,19 @@
       },
 
       editItem (item) {
-        this.editedIndex = this.requirements.indexOf(item)
+        this.editedIndex = this.criteria.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
 
       deleteItem (item) {
-        this.editedIndex = this.requirements.indexOf(item)
+        this.editedIndex = this.criteria.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialogDelete = true
       },
 
       deleteItemConfirm () {
-        this.requirements.splice(this.editedIndex, 1)
+        this.criteria.splice(this.editedIndex, 1)
         this.closeDelete()
       },
 
@@ -278,9 +278,9 @@
 
       save () {
         if (this.editedIndex > -1) {
-          Object.assign(this.requirements[this.editedIndex], this.editedItem)
+          Object.assign(this.criteria[this.editedIndex], this.editedItem)
         } else {
-          this.requirements.push(this.editedItem)
+          this.criteria.push(this.editedItem)
         }
         this.close()
       },
