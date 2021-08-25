@@ -8,6 +8,7 @@ import 'firebase/auth';
 import {store} from './store/'
 import VueApexCharts from 'vue-apexcharts'
 
+Vue.use(require('vue-faker'));
 Vue.use(VueApexCharts)
 
 Vue.component('apexchart', VueApexCharts)
