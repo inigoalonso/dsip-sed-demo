@@ -48,15 +48,15 @@
                 <v-container>
                     <v-row>
                         <v-col cols="12" md="4">
-                          <v-text-field v-model="project.title" label="Project title" required :disabled="!userIsOwner"></v-text-field>
-                          <v-text-field v-model="project.status" label="Status" required :disabled="!userIsOwner"></v-text-field>
+                          <v-text-field v-model="project.title" label="Project title" required :disabled=!userIsOwner></v-text-field>
+                          <v-text-field v-model="project.status" label="Status" required :disabled=!userIsOwner></v-text-field>
                           <v-text-field v-model="project.person" label="Person" required disabled></v-text-field>
                           <v-text-field v-model="project.id" label="id" required disabled></v-text-field>
                         </v-col>
 
                         <v-col cols="12" md="8">
-                          <v-textarea v-model="project.description" label="Description" required :disabled="!userIsOwner"></v-textarea>
-                          <v-switch v-model="project.shared" :label="`Shared project`" required :disabled="!userIsOwner"></v-switch>
+                          <v-textarea v-model="project.description" label="Description" required :disabled=!userIsOwner></v-textarea>
+                          <v-switch v-model="project.shared" :label="`Shared project`" required :disabled=!userIsOwner></v-switch>
                         </v-col>
                         <v-col cols="12">
                           <v-flex justify="space-around">
@@ -65,6 +65,7 @@
                               class="mr-4"
                               @click="saveProjectChanges()"
                               :loading="loadingProject"
+                              :disabled=!userIsOwner
                             >
                               Save changes
                             </v-btn>
@@ -82,6 +83,7 @@
                               color="error"
                               class="mr-4"
                               @click="deleteProject()"
+                              :disabled=!userIsOwner
                             >
                               Delete project
                             </v-btn>
