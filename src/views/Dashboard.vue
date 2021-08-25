@@ -31,6 +31,15 @@
         </v-tooltip>
         <v-tooltip top>
           <template v-slot:activator="{ on }">
+            <v-btn small text color="grey" @click="sortBy('organization')" v-on="on">
+              <v-icon small left>house</v-icon>
+              <span class="caption text-lowercase">By Organization</span>
+            </v-btn>
+          </template>
+          <span>Sort by project organization</span>
+        </v-tooltip>
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
             <v-btn small text color="grey" @click="sortBy('status')" v-on="on">
 <v-icon small left>mdi-traffic-light</v-icon>
               <span class="caption text-lowercase">By Status</span>
