@@ -6,15 +6,12 @@
     >
       <v-col>
         <v-row no-gutters>
-          <v-col md="6">
-            <v-card
-              class="mx-3 mt-3"
-              min-height="438"
-            >
-              <v-card-title></v-card-title>
-              <br>
-              <br>
-              <v-card-text class="py-0">
+          <v-col md="12">
+            <v-row>
+              <h3>Configuration</h3>
+            </v-row>
+            <v-row>
+              <v-col md="6">
                 <svg 
                   :height="height+130" 
                   width="312"
@@ -79,15 +76,8 @@
                   />
                   Sorry, your browser does not support inline SVG.  
                 </svg>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col md="6">
-            <v-card
-              class="mx-3 mt-3"
-              min-height="438"
-            >
-              <v-card-text>
+              </v-col>
+              <v-col md="6">
                 <v-container fluid class="py-0">
                   <v-row>
                     <v-col cols="12" class="py-0">
@@ -261,16 +251,13 @@
                     </v-col>
                   </v-row>
                 </v-container>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col md="6">
-            <v-card
-              class="mx-3 my-3"
-              min-width="296"
-            >
-              <v-card-title>Performance Analysis</v-card-title>
-              <v-card-text>
+              </v-col>
+            </v-row>
+            <v-row>
+              <h3>Context</h3>
+            </v-row>
+            <v-row>
+              <v-col md="6">
                 <p class="subtitle-2">Environment</p>
                 <v-slider
                   v-model="Troom"
@@ -360,16 +347,8 @@
                   </template>
                 </v-slider>
                 <p>Temperature: <span class="font-weight-bold">{{ Tcoffee(waitingTime).toFixed(2) }} ºC</span> after {{Math.floor(waitingTime / 60)}} minutes and {{waitingTime-60*Math.floor(waitingTime / 60)}} seconds.</p>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col md="6">
-            <v-card
-              class="mx-3 my-3"
-              min-width="296"
-            >
-              <v-card-title>Sustainability Analysis</v-card-title>
-              <v-card-text>
+              </v-col>
+              <v-col md="6">
                 <p class="subtitle-2">Amount of material</p>
                 <!-- <p>Weight: <span class="font-weight-bold">{{ mugWeight }} g</span> of <span class="font-weight-bold">{{ selectedMaterial }}</span></p> -->
                 <p>Score:: <span class="font-weight-bold">{{ 2+2 }}</span></p>
@@ -377,18 +356,22 @@
                 <p>Score:: <span class="font-weight-bold">{{ 2+2 }}</span></p>
                 <p class="subtitle-2">Emissions from manufacturing</p>
                 <p>Score:: <span class="font-weight-bold">{{ 2+2 }}</span></p>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col md="12">
-            <v-card
-              class="mx-3 my-3"
-              min-width="296"
-            >
-              <v-card-actions>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col md="6">
+                <v-text-field
+                  v-model="designName"
+                  label="Design name"
+                  clearable
+                  append-icon="mdi-shuffle"
+                  @click:append="randomizeName"
+                ></v-text-field>
+              </v-col>
+              <v-col md="6">
                 <v-btn @click="submitDesign" color="primary" text large>Submit</v-btn>
-              </v-card-actions>
-            </v-card>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
       </v-col>
@@ -427,6 +410,7 @@ import router from '@/router'
     },
     data () {
       return {
+        designName: null,
         loadingMug: false,
         snackbarUpdatedMug: false,
         snackbarDeletedMug: false,
@@ -616,6 +600,12 @@ import router from '@/router'
       },
     },
     methods: {
+      capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      },
+      randomizeName () {
+        this.designName = this.capitalizeFirstLetter(this.$faker().lorem.words())
+      },
       deleteMug(){
         db.collection('mugs').doc(this.$route.params.id).delete().then(() => {
           this.snackbarDeletedMug = true;
@@ -755,6 +745,7 @@ import router from '@/router'
           createdOn: new Date(),
           creator: this.userName(),
           projectId: this.projectId,
+          name: this.designName,
         }
         this.overlay = !this.overlay
         this.uploading = true
@@ -782,7 +773,7 @@ import router from '@/router'
     },
     mounted(){
       // Do like in ViewDiagram, including some update function?
-      console.log(this.$faker().random.words())
+      this.randomizeName()
     },
   }
 </script>
