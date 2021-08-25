@@ -300,6 +300,11 @@ export default {
           description: 'Minimize the CO2 emissions from manufacturing.',
           weight: 3,
         },
+        {
+          name: 'Supply chain risk',
+          description: 'Limit the risk (low: traceable, renewable, reusable, robust delivery/provision) on the sourcing of materials/components.',
+          weight: 3,
+        },
       ],
       series: [
         {
