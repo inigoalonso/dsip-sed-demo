@@ -48,14 +48,15 @@
                 <v-container>
                     <v-row>
                         <v-col cols="12" md="4">
-                          <v-text-field v-model="project.title" label="Project title" required></v-text-field>
-                          <v-text-field v-model="project.status" label="Status" required></v-text-field>
+                          <v-text-field v-model="project.title" label="Project title" required :disabled="!userIsOwner"></v-text-field>
+                          <v-text-field v-model="project.status" label="Status" required :disabled="!userIsOwner"></v-text-field>
                           <v-text-field v-model="project.person" label="Person" required disabled></v-text-field>
                           <v-text-field v-model="project.id" label="id" required disabled></v-text-field>
                         </v-col>
 
                         <v-col cols="12" md="8">
-                          <v-textarea v-model="project.description" label="Description" required></v-textarea>
+                          <v-textarea v-model="project.description" label="Description" required :disabled="!userIsOwner"></v-textarea>
+                          <v-switch v-model="project.shared" :label="`Shared project`" required :disabled="!userIsOwner"></v-switch>
                         </v-col>
                         <v-col cols="12">
                           <v-flex justify="space-around">
@@ -99,7 +100,16 @@
         <v-card flat>
           <v-card-title>Enhanced Function-Means Model</v-card-title>
           <v-card-text>
-            TODO
+
+    <v-expansion-panels popout>
+      <v-expansion-panel>
+        <v-expansion-panel-header>E F-M tree example</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <img src="/efm.svg" alt="EFM of mug">
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
+
           </v-card-text>
         </v-card>
         <v-card flat>
@@ -403,6 +413,18 @@ export default {
     project () {
       return this.$store.getters.project
     },
+    userIsOwner () {
+      let user = this.$store.getters.user
+      console.log(user)
+      console.log(this.project.person)
+      if (user == this.project.person) {
+        console.log(true)
+        return true
+      } else {
+        console.log(false)
+        return false
+      }
+    },
   },
   methods: {
     deleteProject(){
@@ -438,6 +460,7 @@ export default {
         person: this.project.person,
         status: this.project.status,
         description: this.project.description,
+        shared: this.project.shared,
       }
       db.collection('projects').doc(this.$route.params.id).set(project).then(() => {
         this.loadingProject = false

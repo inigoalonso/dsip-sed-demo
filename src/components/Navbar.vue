@@ -20,6 +20,8 @@
       </v-toolbar-title>
       
       <v-spacer></v-spacer>
+      PROOF OF CONCEPT
+      <v-spacer></v-spacer>
       
       <v-btn v-if="!userLogedIn()" text color="white" :to="{ path: '/signup'}" append>
         <span>Sign Up</span>

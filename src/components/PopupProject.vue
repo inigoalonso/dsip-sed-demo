@@ -15,6 +15,7 @@
           <v-text-field v-model="title" label="Title" prepend-icon="folder" :rules="inputRules"></v-text-field>
           <v-textarea v-model="description" label="Information" prepend-icon="edit" :rules="inputRules"></v-textarea>
           <v-select v-model="status" prepend-icon="mdi-traffic-light" :items="projectStatuses" :hint="`${status}`" item-text="status" item-value="abbr" label="Status"></v-select>
+          <v-switch v-model="shared" :label="`Shared project: ${shared.toString()}`"></v-switch>
 
           <v-spacer></v-spacer>
 
@@ -45,6 +46,7 @@ export default {
       dialog: false,
       user: null,
       status: '',
+      shared: false,
       projectStatuses: [
         {status: 'Complete, archived', abbr: 'complete'}, 
         {status: 'Ongoing, active', abbr: 'ongoing'}, 
@@ -61,6 +63,7 @@ export default {
           description: this.description,
           person: this.user.id,
           status: this.status,
+          shared: this.shared,
         }
         db.collection('projects').add(project).then((docRef) => {
           this.loading = false

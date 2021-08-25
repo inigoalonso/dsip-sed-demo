@@ -113,7 +113,7 @@ export default {
   computed: {
     myProjects() {
       return this.projects.filter(project => {
-        return project.person === this.id && project.status != 'TODO'
+        return (project.person === this.id && project.status != 'TODO') || project.shared
       })
     }
   },
