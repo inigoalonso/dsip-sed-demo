@@ -5,6 +5,7 @@
             <v-text-field clearable v-model="name" :rules="nameRules" label="Name" required></v-text-field>
             <v-text-field clearable v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
             <v-text-field clearable v-model="password" :rules="passwordRules" label="Password" :append-icon="showPassword ? 'visibility' : 'visibility_off'" :type="showPassword ? 'text' : 'password'" @click:append="showPassword = !showPassword" required></v-text-field>
+            <v-select clearable v-model="organization" :rules="organizationRules" :items="organizations" label="Organization" required></v-select>
             <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree the terms to continue.']" label="Do you agree to the Terms and Privacy Policy?"
                 required></v-checkbox>
             <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
@@ -43,6 +44,11 @@ import db from '@/fb'
       passwordRules: [
           v => v.length >= 8 || 'Min 8 characters',
       ],
+      organizations: ['Group 1', 'Group 2', 'Group 3', 'Group 4'],
+      organization: null,
+      organizationRules: [
+        v => !!v || 'Organization is required',
+      ],
       checkbox: false,
       slug: '',
       feedback: '',
@@ -58,7 +64,7 @@ import db from '@/fb'
             lower: true
           })
           
-          let newUser = {name: this.name, email: this.email, password: this.password, slug: slug}
+          let newUser = {name: this.name, email: this.email, password: this.password, slug: slug, organization: this.organization}
 
           this.$store.dispatch('signupAction', newUser)
             .then(() => {
@@ -74,6 +80,7 @@ import db from '@/fb'
         this.email = '';
         this.password = '';
         this.checkbox = false;
+        this.organization = null;
         this.resetValidation();
       },
       resetValidation () {
