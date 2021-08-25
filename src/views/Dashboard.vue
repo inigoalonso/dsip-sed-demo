@@ -55,17 +55,21 @@
         <v-hover v-slot:default="{ hover }" :key="project.title">
           <v-card class="px-3 elevation-0" :class="{ 'on-hover': hover }" text :style="{ cursor: 'pointer'}">
             <v-layout row wrap :class="`pa-3 project ${project.status}`" @click="goToProject(project.id)">
-              <v-flex xs12 md3>
+              <v-flex xs12 md2>
                 <div class="caption grey--text">Project title</div>
                 <div>{{ project.title }}</div>
               </v-flex>
-              <v-flex xs12 md5>
+              <v-flex xs12 md4>
                 <div class="caption grey--text">Description</div>
                 <div>{{ project.description }}</div>
               </v-flex>
               <v-flex xs6 md2>
                 <div class="caption grey--text">Person</div>
                 <div>{{ project.person }}</div>
+              </v-flex>
+              <v-flex xs6 md2>
+                <div class="caption grey--text">Organization</div>
+                <div>{{ project.organization }}</div>
               </v-flex>
               <v-flex xs6 md2>
                 <div class="text-end">
@@ -113,7 +117,7 @@ export default {
   computed: {
     myProjects() {
       return this.projects.filter(project => {
-        return (project.person === this.id && project.status != 'TODO') || project.shared
+        return (project.person === this.id && project.status != 'TODO') || project.shared == 'public' || (project.shared == 'organization' && project.organization ==  this.organization)
       })
     }
   },
@@ -152,6 +156,7 @@ export default {
         //console.log(this.name);
         this.id = doc.id;
         //console.log(this.id);
+        this.organization = doc.data().organization;
       });
     })
   }
