@@ -6,8 +6,21 @@
             <v-text-field clearable v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
             <v-text-field clearable v-model="password" :rules="passwordRules" label="Password" :append-icon="showPassword ? 'visibility' : 'visibility_off'" :type="showPassword ? 'text' : 'password'" @click:append="showPassword = !showPassword" required></v-text-field>
             <v-select clearable v-model="organization" :rules="organizationRules" :items="organizations" label="Organization" required></v-select>
-            <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree the terms to continue.']" label="Do you agree to the Terms and Privacy Policy?"
-                required></v-checkbox>
+            <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree the terms to continue.']" label="Do you agree to the Terms and Privacy Policy?" required>
+              <template v-slot:append>
+                <v-tooltip
+                  bottom
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-icon v-on="on">
+                      mdi-help-circle-outline
+                    </v-icon>
+                  </template>
+                  We'll just use this to authenticate you during the exercise, all data will be deleted afterwards.
+                </v-tooltip>
+              </template>
+            </v-checkbox>
+
             <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
                 Sign Up
             </v-btn>
