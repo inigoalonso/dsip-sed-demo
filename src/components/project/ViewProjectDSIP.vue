@@ -129,7 +129,7 @@
       </v-tab-item>
       <v-tab-item>
         <v-row>
-          <v-col cols="6">
+<!--           <v-col cols="6">
             <v-card>
               <v-card-title>
                 <span class="text-h5">Heatmap</span>
@@ -141,39 +141,39 @@
                 </div>
               </v-card-text>
             </v-card>
-          </v-col>
+          </v-col> -->
           <v-col cols="6">
-            <v-card>
+<!--            <v-card>
               <v-card-title>
                 <span class="text-h5">Radar chart</span>
               </v-card-title>
 
-              <v-card-text>
+              <v-card-text> -->
                 <div id="radarChart">
                   <apexchart type="radar" height="400" :options="radarChartOptions" :series="series"></apexchart>
                 </div>
-              </v-card-text>
-            </v-card>
+<!--               </v-card-text>
+            </v-card> -->
           </v-col>
           <v-col cols="6">
-            <v-card>
+<!--            <v-card>
               <v-card-title>
                 <span class="text-h5">Scatter chart</span>
               </v-card-title>
 
-              <v-card-text>
+              <v-card-text> -->
                 <div id="scatterChart">
-                  <apexchart type="scatter" height="350" :options="scatterChartOptions" :series="series"></apexchart>
+                  <apexchart type="scatter" height="350" :options="scatterChartOptions" :series="scatterSeries"></apexchart>
                 </div>
-              </v-card-text>
-            </v-card>
+<!--               </v-card-text>
+            </v-card> -->
           </v-col>
-          <v-col cols="6">
+          <v-col cols="12">
             <v-card
               max-width="1280"
               class="mx-auto my-3"
             >
-              <v-card-title>Collected designs</v-card-title>
+              <!-- <v-card-title>Collected designs</v-card-title> -->
               <v-card-text>
                 <v-simple-table>
                   <thead>
@@ -261,104 +261,49 @@ export default {
       loadingProject: false,
       snackbarUpdatedProject: false,
       snackbarDeletedProject: false,
-      searchPerformanceCriteria: '',
-      searchSustainabilityCriteria: '',
-      headersPerformanceCriteria: [
-        { text: 'Name', value: 'name', align: 'left' },
-        { text: 'Description', value: 'description' },
-        { text: 'Weight', value: 'weight' },
-      ],
-      headersSustainabilityCriteria: [
-        { text: 'Name', value: 'name', align: 'left' },
-        { text: 'Description', value: 'description' },
-        { text: 'Weight', value: 'weight' },
-      ],
-      performanceCriteria: [
-        {
-          name: 'Keep heat',
-          description: 'Maximize the time the drink is warm.',
-          weight: 3,
-        },
-        {
-          name: 'Volume',
-          description: 'Stay as close as possible to an ideal volume of 400ml.',
-          weight: 2,
-        },
-        {
-          name: 'Weight',
-          description: 'Stay as close as possible to an ideal weight of 250g.',
-          weight: 1,
-        },
-      ],
-      sustainabilityCriteria: [
-        {
-          name: 'Amount of material',
-          description: 'Minimize the amount of material used.',
-          weight: 1,
-        },
-        {
-          name: 'Recyclability',
-          description: 'Maximize the recyclability of the product.',
-          weight: 2,
-        },
-        {
-          name: 'Emissions from manufacturing',
-          description: 'Minimize the CO2 emissions from manufacturing.',
-          weight: 3,
-        },
-        {
-          name: 'Supply chain risk',
-          description: 'Limit the risk (low: traceable, renewable, reusable, robust delivery/provision) on the sourcing of materials/components.',
-          weight: 3,
-        },
-      ],
       series: [
         {
-          name: "Performance",
+          name: "Option 1",
           data: [{
-            x: 'Option 1',
+            x: 'Performance',
             y: 22
           }, {
-            x: 'Option 2',
+            x: 'Sustainability',
+            y: 42
+          }, {
+            x: 'Total',
+            y: 32
+          }]
+        },
+        {
+          name: "Option 2",
+          data: [{
+            x: 'Performance',
+            y: 2
+          }, {
+            x: 'Sustainability',
+            y: 12
+          }, {
+            x: 'Total',
+            y: 7
+          }]
+        }
+      ],
+      scatterSeries: [
+        {
+          name: "Designs",
+          data: [{
+            x: 11,
+            y: 22
+          }, {
+            x: 5,
             y: 29
           }, {
-            x: 'Option 3',
+            x: 26,
             y: 3
           }, {
-            x: 'Option 4',
+            x: 60,
             y: 42
-          }]
-        },
-        {
-          name: "Sustainability",
-          data: [{
-            x: 'Option 1',
-            y: 21
-          }, {
-            x: 'Option 2',
-            y: 13
-          }, {
-            x: 'Option 3',
-            y: 43
-          }, {
-            x: 'Option 4',
-            y: 37
-          }]
-        },
-        {
-          name: "Total",
-          data: [{
-            x: 'Option 1',
-            y: 43
-          }, {
-            x: 'Option 2',
-            y: 42
-          }, {
-            x: 'Option 3',
-            y: 46
-          }, {
-            x: 'Option 4',
-            y: 79
           }]
         }
       ],
@@ -372,7 +317,7 @@ export default {
         },
         xaxis: {
           type: 'category',
-          categories: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+          categories: ['Performance', 'Sustainability', 'Total'],
           position: 'top'
         },
         grid: {
@@ -389,7 +334,7 @@ export default {
         dataLabels: {
           enabled: false
         },
-        xaxis: {
+        yaxis: {
           type: 'category',
           categories: ['Option 1', 'Option 2', 'Option 3', 'Option 4']
         },
@@ -397,6 +342,9 @@ export default {
           padding: {
             right: 20
           }
+        },
+        legend: {
+          show: false
         }
       },
       scatterChartOptions: {
@@ -404,20 +352,34 @@ export default {
           height: 350,
           type: 'scatter',
           zoom: {
-            enabled: true,
+            enabled: false,
             type: 'xy'
           }
         },
         xaxis: {
+          min: 0,
+          max: 100,
           tickAmount: 10,
           labels: {
             formatter: function(val) {
               return parseFloat(val).toFixed(1)
             }
-          }
+          },
+          title: {
+            text: "Performance"
+          },
+          type: 'numeric'
         },
         yaxis: {
-          tickAmount: 7
+          min: 0,
+          max: 100,
+          tickAmount: 10,
+          title: {
+            text: "Sustainability"
+          }
+        },
+        legend: {
+          show: false
         }
       },
     }
@@ -428,13 +390,13 @@ export default {
     },
     userIsOwner () {
       let user = this.$store.getters.user
-      console.log(user)
-      console.log(this.project.person)
+      //console.log(user)
+      //console.log(this.project.person)
       if (user == this.project.person) {
-        console.log(true)
+        //console.log(true)
         return true
       } else {
-        console.log(false)
+        //console.log(false)
         return false
       }
     },
@@ -443,8 +405,8 @@ export default {
     deleteProject(){
       db.collection('projects').doc(this.$route.params.id).delete().then(() => {
         this.snackbarDeletedProject = true;
-        //delete all the nodes related to the project
-        db.collection('nodes').where('project', '==', this.$route.params.id)
+        //delete all the mugs related to the project
+        db.collection('mugs').where('projectId', '==', this.$route.params.id)
           .get()
           .then(function(querySnapshot) {
             // Once we get the results, begin a batch
@@ -518,8 +480,9 @@ export default {
           }
 
         });
-
-        this.designs = data;
+        this.designs = data.filter(design => {
+          return design.projectId == this.project.id
+        });
 
       });
     },
