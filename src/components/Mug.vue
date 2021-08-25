@@ -11,7 +11,9 @@
               class="mx-3 mt-3"
               min-height="438"
             >
-              <v-card-title>Mug</v-card-title>
+              <v-card-title></v-card-title>
+              <br>
+              <br>
               <v-card-text class="py-0">
                 <svg 
                   :height="height+130" 
@@ -518,7 +520,6 @@ import router from '@/router'
     computed: {
       projectId () {
         var projectId = this.$store.getters.project.id
-        console.log(projectId)
         return projectId
       },
       mug () {
@@ -781,6 +782,7 @@ import router from '@/router'
     },
     mounted(){
       // Do like in ViewDiagram, including some update function?
+      console.log(this.$faker().random.words())
     },
   }
 </script>
