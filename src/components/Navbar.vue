@@ -45,7 +45,7 @@
       <v-layout column align-center>
         <v-flex class="mt-5 text-center">
           <v-avatar size="100">
-            <img src="/user.png">
+            <img :src="avatarUrl" alt="Random avatar">
           </v-avatar>
           <p class="white--text subheading mt-1">{{ this.userName() }}</p>
         </v-flex>
@@ -203,6 +203,11 @@ export default {
       ],
     }
   },
+  computed: {
+    avatarUrl () {
+      return "https://avatars.dicebear.com/api/bottts/"+ this.userId() +".svg"
+    },
+  },
   methods: {
     logout(){
       this.$store.dispatch('logoutAction')
@@ -221,6 +226,14 @@ export default {
       let user = this.$store.getters.user
       try {
         return user.name
+      } catch {
+        return ''
+      }
+    },
+    userId () {
+      let user = this.$store.getters.user
+      try {
+        return user.user_id
       } catch {
         return ''
       }
