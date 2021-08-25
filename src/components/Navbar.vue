@@ -57,7 +57,7 @@
             <v-icon class="white--text">mdi-account-circle</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title class="white--text">Profile</v-list-item-title>
+            <v-list-item-title class="white--text">My Profile</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item router :to="'/dashboard'">
