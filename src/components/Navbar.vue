@@ -205,7 +205,7 @@ export default {
   },
   computed: {
     avatarUrl () {
-      return "https://avatars.dicebear.com/api/bottts/"+ this.userId() +".svg"
+      return "https://avatars.dicebear.com/api/bottts/"+ this.userId() +".svg"//+"?colors[]=green&colors[]=lightGreen&colors[]=lime"
     },
   },
   methods: {
