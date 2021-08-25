@@ -234,6 +234,12 @@
             type: 'Sustainability',
             weight: 3,
           },
+          {
+            name: 'Supply chain risk',
+            description: 'Limit the risk (low: traceable, renewable, reusable, robust delivery/provision) on the sourcing of materials/components.',
+            type: 'Sustainability',
+            weight: 3,
+          },
         ]
       },
 
