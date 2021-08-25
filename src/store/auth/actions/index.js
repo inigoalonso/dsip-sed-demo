@@ -18,7 +18,9 @@ export default {
               // Save the user in the 'users' collection too
               ref.set({
                 name: payload.name,
-                user_id: cred.user.uid
+                user_id: cred.user.uid,
+                email: payload.email,
+                organization: payload.organization
               })
               .then(() => {
                 commit('setUser', {name: payload.name, slug: payload.slug, user_id: cred.user.uid})
