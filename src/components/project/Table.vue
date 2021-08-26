@@ -3,7 +3,6 @@
     :headers="headers"
     :items="criteria"
     sort-by="total"
-    class="elevation-1"
   >
     <template v-slot:top>
       <v-toolbar
@@ -134,9 +133,10 @@
     <template v-slot:no-data>
       <v-btn
         color="green"
+        dark
         @click="initialize"
       >
-        Reset
+        Reset example data
       </v-btn>
     </template>
   </v-data-table>
@@ -156,7 +156,6 @@
         },
         { text: 'Description', value: 'description' },
         { text: 'Type', value: 'type' },
-        { text: 'Weight', value: 'weight' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       criteria: [],
@@ -199,43 +198,50 @@
       initialize () {
         this.criteria = [
           {
-            name: 'Keep heat',
+            name: 'Thermal',
+            slug: 'thermal',
             description: 'Maximize the time the drink is warm.',
             type: 'Performance',
             weight: 6,
           },
           {
             name: 'Volume',
+            slug: 'volume',
             description: 'Stay as close as possible to an ideal volume of 400ml.',
             type: 'Performance',
             weight: 2,
           },
           {
             name: 'Weight',
+            slug: 'weight',
             description: 'Stay as close as possible to an ideal weight of 250g.',
             type: 'Performance',
             weight: 1,
           },
           {
             name: 'Amount of material',
+            slug: 'amount-of-material',
             description: 'Minimize the amount of material used.',
             type: 'Sustainability',
             weight: 5,
           },
           {
             name: 'Recyclability',
+            slug: 'recyclability',
             description: 'Maximize the recyclability of the product.',
             type: 'Sustainability',
             weight: 4,
           },
-          {
-            name: 'Emissions from manufacturing',
+/*           {
+            name: 'Emissions',
+            slug: 'emissions',
             description: 'Minimize the CO2 emissions from manufacturing.',
             type: 'Sustainability',
             weight: 3,
-          },
+          }, */
           {
             name: 'Supply chain risk',
+            slug: 'supply-chain-risk',
             description: 'Limit the risk (low: traceable, renewable, reusable, robust delivery/provision) on the sourcing of materials/components.',
             type: 'Sustainability',
             weight: 3,
