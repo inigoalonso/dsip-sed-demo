@@ -415,7 +415,7 @@ export default {
       barChartOptions: {
         chart: {
           type: 'bar',
-          height: 350,
+          height: 300,
           stacked: true,
           stackType: '100%'
         },
@@ -430,6 +430,9 @@ export default {
           }
         }],
         xaxis: {
+          labels: {
+            show: false
+          },
           categories: ['Thermal','Volume','Weight','Amount of material','Recyclability','Supply chain risk'],
         },
         fill: {
@@ -440,7 +443,7 @@ export default {
           offsetX: 0,
           offsetY: 50
         },
-        colors:['#F44336', '#E91E63', '#9C27B0', '#009688', '#4CAF50', '#8BC34A'],
+        colors:['#8BC34A', '#4CAF50', '#009688', '#9C27B0', '#E91E63', '#F44336'],
       },
     }
   },
@@ -448,28 +451,28 @@ export default {
     barChartSeries () {
       return [
         {
-          name: "Thermal",
-          data: [this.weights.thermalCriterion]
-        },
-        {
-          name: "Volume",
-          data: [this.weights.volumeCriterion]
-        },
-        {
-          name: "Weight",
-          data: [this.weights.weightCriterion]
-        },
-        {
-          name: "Amount of material",
-          data: [this.weights.amountCriterion]
+          name: "Supply chain risk",
+          data: [this.weights.supplyCriterion]
         },
         {
           name: "Recyclability",
           data: [this.weights.recyclabilityCriterion]
         },
         {
-          name: "Supply chain risk",
-          data: [this.weights.supplyCriterion]
+          name: "Amount of material",
+          data: [this.weights.amountCriterion]
+        },
+        {
+          name: "Weight",
+          data: [this.weights.weightCriterion]
+        },
+        {
+          name: "Volume",
+          data: [this.weights.volumeCriterion]
+        },
+        {
+          name: "Thermal",
+          data: [this.weights.thermalCriterion]
         }
       ]
     },
