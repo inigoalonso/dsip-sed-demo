@@ -213,7 +213,7 @@
               <v-expansion-panel>
                 <v-expansion-panel-header>E F-M tree example</v-expansion-panel-header>
                 <v-expansion-panel-content>
-                  <img src="/efm2.svg" alt="EFM of mug" width="100%">
+                  <img src="/efm.svg" alt="EFM of mug" width="100%">
                 </v-expansion-panel-content>
               </v-expansion-panel>
             </v-expansion-panels>
