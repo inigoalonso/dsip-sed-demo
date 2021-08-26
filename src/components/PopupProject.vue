@@ -81,6 +81,7 @@ export default {
           status: this.status,
           shared: this.shared,
           organization: this.user.organization,
+          criteria: [],
         }
         db.collection('projects').add(project).then((docRef) => {
           this.loading = false
