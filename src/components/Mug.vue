@@ -505,7 +505,7 @@ import router from '@/router'
             fractureToughness: 1.05, // MPa m^1/2
             strenght: 100, // MPa
             recyclability: 0.65, // https://doi.org/10.1016/S0921-3449(02)00056-3
-            criticality: 0.10,
+            criticality: 0.90,
           },
           {
             text:'Steel',
@@ -550,7 +550,7 @@ import router from '@/router'
             fractureToughness: 3.3, // MPa m^1/2
             strenght: 60, // MPa
             recyclability: 0.95, // https://doi.org/10.1016/S0921-3449(02)00056-3
-            criticality: 0.70,
+            criticality: 0.10,
           },
           {
             text:'Glass',
