@@ -65,6 +65,7 @@
                               class="mr-4"
                               @click="saveProjectChanges()"
                               :loading="loadingProject"
+                              :disabled=!userIsOwner
                             >
                               Save changes
                             </v-btn>
@@ -477,13 +478,9 @@ export default {
     },
     userIsOwner () {
       let user = this.$store.getters.user
-      //console.log(user)
-      //console.log(this.project.person)
-      if (user == this.project.person) {
-        //console.log(true)
+      if (user.slug == this.project.person) {
         return true
       } else {
-        //console.log(false)
         return false
       }
     },
