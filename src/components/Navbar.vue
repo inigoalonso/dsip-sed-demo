@@ -22,21 +22,22 @@
       <v-spacer></v-spacer>
       
       <v-btn v-if="!userLogedIn()" text color="white" :to="{ path: '/signup'}" append>
-        <span>Sign Up</span>
+        <span class="d-none d-lg-block">Sign Up</span>
         <v-icon right>mdi-account-plus</v-icon>
       </v-btn>
       <v-btn v-if="!userLogedIn()" text color="white" :to="{ path: '/login'}" append>
-        <span>Login</span>
+        <span class="d-none d-lg-block">Login</span>
         <v-icon right>mdi-login</v-icon>
       </v-btn>
       <v-btn v-if="userLogedIn()" text color="white" @click="logout">
-        <span>Logout</span>
+        <span class="d-none d-lg-block">Logout</span>
         <v-icon right>mdi-logout</v-icon>
       </v-btn>
       <v-btn text color="white" href="https://dsip-staging.web.app/">
-        <span>Toolbox</span>
+        <span class="d-none d-lg-block">Toolbox</span>
         <v-icon right>mdi-toolbox</v-icon>
       </v-btn>
+
     </v-app-bar>
 
     <v-navigation-drawer v-if="userLogedIn()" app v-model="drawer" class="secondary">
