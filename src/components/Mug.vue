@@ -688,26 +688,29 @@ import router from '@/router'
         return ((v1-v2+vHandle)*this.material['density']).toFixed(2)
       },
       performance () {
-        var thermalPerformance = Math.exp((this.time2coffee(this.temperatureRange[0]))/200) * this.weights.thermalCriterion
+        var thermalPerformance = Math.exp((this.time2coffee(this.temperatureRange[0]))/200)
         if (this.selectedMaterial == "Polypropylene") {
-          thermalPerformance = 40 * this.weights.thermalCriterion
+          thermalPerformance = 40 
         }
         console.log(this.mugVolume)
-        var volumePerformance = 2000 / (Math.abs(200-this.mugVolume)+5) * this.weights.volumeCriterion
-        var weightPerformance= 7700 / (Math.abs(250-this.mugWeight)+5) * this.weights.weightCriterion
-        var result = ( thermalPerformance + volumePerformance + weightPerformance ) / this.sumWeights
+        var volumePerformance = 2000 / (Math.abs(200-this.mugVolume)+5)
+        var weightPerformance= 7700 / (Math.abs(250-this.mugWeight)+5)
+        var result = ( thermalPerformance + volumePerformance + weightPerformance ) / 5
         console.log(this.weights.thermalCriterion)
         return Math.floor(result)
       },
       sustainability () {
-        var amountMaterial = 7700 / (Math.abs(0-this.mugWeight)+5) * this.weights.amountCriterion
-        var typeMaterial = this.material.recyclability * 100 * this.weights.recyclabilityCriterion
-        var supplyChain = this.material.criticality * 100 * this.weights.supplyCriterion
-        var result = ( amountMaterial + typeMaterial + supplyChain ) / this.sumWeights
+        var amountMaterial = 7700 / (Math.abs(0-this.mugWeight)+5)
+        var typeMaterial = this.material.recyclability * 100 
+        var supplyChain = this.material.criticality * 100
+        var result = ( amountMaterial + typeMaterial + supplyChain ) / 5
         return Math.floor(result)
       },
       total () {
-        return ( this.performance + this.sustainability) / 2
+        var a = this.weights.thermalCriterion + this.weights.volumeCriterion + this.weights.weightCriterion
+        var b = this.weights.amountCriterion + this.weights.recyclabilityCriterion + this.weights.supplyCriterion
+
+        return Math.floor(( this.performance * a + this.sustainability * b) / (a+b))
       },
     },
     methods: {
