@@ -410,6 +410,24 @@
                     {{ total }}
                   </v-progress-circular>
                 </div>
+                <v-expansion-panels>
+                  <v-expansion-panel>
+                    <v-expansion-panel-header>
+                      Additional info
+                    </v-expansion-panel-header>
+                    <v-expansion-panel-content class="text-left">
+                      Total Value score calculated with the weights assigned to the different criteria:
+                      <ul>
+                        <li>Thermal: {{ this.weights.thermalCriterion }}</li>
+                        <li>Volume: {{ this.weights.volumeCriterion }}</li>
+                        <li>Weight: {{ this.weights.weightCriterion }}</li>
+                        <li>Amount of material: {{ this.weights.amountCriterion }}</li>
+                        <li>Recyclability: {{ this.weights.recyclabilityCriterion }}</li>
+                        <li>Supply chain risk: {{ this.weights.supplyCriterion }}</li>
+                      </ul>
+                    </v-expansion-panel-content>
+                  </v-expansion-panel>
+                </v-expansion-panels>
               </v-col>
             </v-row>
             <v-row>
