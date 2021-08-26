@@ -860,6 +860,7 @@ import router from '@/router'
           sustainability: this.sustainability,
           performance: this.performance,
           total: this.total,
+          weights: this.weights,
         }
         this.overlay = !this.overlay
         this.uploading = true
