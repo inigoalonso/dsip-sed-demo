@@ -75,9 +75,20 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.weight"
-                      label="Weight"
+                      v-model="editedItem.origin"
+                      label="Origin"
                     ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-select
+                      v-model="editedItem.type"
+                      label="Type"
+                      :items="types"
+                    ></v-select>
                   </v-col>
                 </v-row>
               </v-container>
@@ -155,6 +166,7 @@
           value: 'name',
         },
         { text: 'Description', value: 'description' },
+        { text: 'Origin', value: 'origin' },
         { text: 'Type', value: 'type' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
@@ -203,6 +215,7 @@
             description: 'Maximize the time the drink is warm.',
             type: 'Performance',
             weight: 6,
+            origin: 'Market survey',
           },
           {
             name: 'Volume',
@@ -210,6 +223,7 @@
             description: 'Stay as close as possible to an ideal volume of 400ml.',
             type: 'Performance',
             weight: 2,
+            origin: 'Market survey',
           },
           {
             name: 'Weight',
@@ -217,6 +231,7 @@
             description: 'Stay as close as possible to an ideal weight of 250g.',
             type: 'Performance',
             weight: 1,
+            origin: 'Ergonomics',
           },
           {
             name: 'Amount of material',
@@ -224,6 +239,7 @@
             description: 'Minimize the amount of material used.',
             type: 'Sustainability',
             weight: 5,
+            origin: 'Production',
           },
           {
             name: 'Recyclability',
@@ -231,6 +247,7 @@
             description: 'Maximize the recyclability of the product.',
             type: 'Sustainability',
             weight: 4,
+            origin: 'Life-Cycle Analysis',
           },
 /*           {
             name: 'Emissions',
@@ -245,6 +262,7 @@
             description: 'Limit the risk (low: traceable, renewable, reusable, robust delivery/provision) on the sourcing of materials/components.',
             type: 'Sustainability',
             weight: 3,
+            origin: 'Sourcing Department',
           },
         ]
       },
