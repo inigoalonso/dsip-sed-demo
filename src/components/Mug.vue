@@ -254,109 +254,188 @@
               </v-col>
             </v-row>
             <v-row>
-              <h3>Context</h3>
+              <h3>Analysis</h3>
+            </v-row>
+            <v-row>
+              <v-col md="4" class="text-center">
+                <h3>Performance</h3>
+                <div>
+                  <v-progress-circular
+                    :rotate="-900"
+                    :size="100"
+                    :width="15"
+                    :value="performance"
+                    color="red"
+                  >
+                    {{ performance }}
+                  </v-progress-circular>
+                </div>
+                <v-expansion-panels>
+                  <v-expansion-panel>
+                    <v-expansion-panel-header>
+                      Additional info
+                    </v-expansion-panel-header>
+                    <v-expansion-panel-content>
+                      <p class="subtitle-2">Environment</p>
+                      <v-slider
+                        v-model="Troom"
+                        thumb-size="24"
+                        thumb-label="always"
+                        min="0"
+                        max="40"
+                        step="1"
+                        label="Room temperature"
+                      >
+                        <template v-slot:prepend>
+                          <v-icon
+                            @click="decrementTroom"
+                          >
+                            mdi-minus
+                          </v-icon>
+                        </template>
+
+                        <template v-slot:append>
+                          <v-icon
+                            @click="incrementTroom"
+                          >
+                            mdi-plus
+                          </v-icon>
+                        </template>
+                      </v-slider>
+                      <v-slider
+                        v-model="Tbrewing"
+                        thumb-size="24"
+                        thumb-label="always"
+                        min="90"
+                        max="100"
+                        step="1"
+                        label="Brewing temperature"
+                      >
+                        <template v-slot:prepend>
+                          <v-icon
+                            @click="decrementTbrewing"
+                          >
+                            mdi-minus
+                          </v-icon>
+                        </template>
+
+                        <template v-slot:append>
+                          <v-icon
+                            @click="incrementTbrewing"
+                          >
+                            mdi-plus
+                          </v-icon>
+                        </template>
+                      </v-slider>
+                      <p class="subtitle-2">Desired temperature range</p>
+                      <v-range-slider
+                        v-model="temperatureRange"
+                        thumb-size="24"
+                        thumb-label
+                        :min="Troom"
+                        :max="Tbrewing"
+                        step="1"
+                      ></v-range-slider>
+                      <p>Time to reach {{temperatureRange[0]}} ºC: <span class="font-weight-bold">{{time2coffee (temperatureRange[0]).toFixed(2)}} s</span></p>
+                      <p>Time to reach {{temperatureRange[1]}} ºC: <span class="font-weight-bold">{{time2coffee (temperatureRange[1]).toFixed(2)}} s</span></p>
+                      <p class="subtitle-2">Desired waiting time</p>
+                      <v-slider
+                        v-model="waitingTime"
+                        thumb-size="24"
+                        thumb-label
+                        min="0"
+                        max="1200"
+                        step="1"
+                        label="(s)"
+                      >
+                        <template v-slot:prepend>
+                          <v-icon
+                            @click="decrementWaitingTime"
+                          >
+                            mdi-minus
+                          </v-icon>
+                        </template>
+
+                        <template v-slot:append>
+                          <v-icon
+                            @click="incrementWaitingTime"
+                          >
+                            mdi-plus
+                          </v-icon>
+                        </template>
+                      </v-slider>
+                      <p>Temperature: <span class="font-weight-bold">{{ Tcoffee(waitingTime).toFixed(2) }} ºC</span> after {{Math.floor(waitingTime / 60)}} minutes and {{waitingTime-60*Math.floor(waitingTime / 60)}} seconds.</p>
+                    </v-expansion-panel-content>
+                  </v-expansion-panel>
+                </v-expansion-panels>
+              </v-col>
+              <v-col md="4" class="text-center">
+                <h3>Sustainability</h3>
+                <div>
+                  <v-progress-circular
+                    :rotate="-900"
+                    :size="100"
+                    :width="15"
+                    :value="sustainability"
+                    color="green"
+                  >
+                    {{ sustainability }}
+                  </v-progress-circular>
+                </div>
+                <v-expansion-panels>
+                  <v-expansion-panel>
+                    <v-expansion-panel-header>
+                      Additional info
+                    </v-expansion-panel-header>
+                    <v-expansion-panel-content>
+                      Material amount: {{ mugWeight }} g
+                      <br>
+                      Material recyclability: {{ material.recyclability }}
+                      <br>
+                      Material criticality: {{ material.criticality }}
+                    </v-expansion-panel-content>
+                  </v-expansion-panel>
+                </v-expansion-panels>
+              </v-col>
+              <v-col md="4" class="text-center">
+                <h3>Total</h3>
+                <div>
+                  <v-progress-circular
+                    :rotate="-900"
+                    :size="100"
+                    :width="15"
+                    :value="total"
+                    color="blue"
+                  >
+                    {{ total }}
+                  </v-progress-circular>
+                </div>
+                <v-expansion-panels>
+                  <v-expansion-panel>
+                    <v-expansion-panel-header>
+                      Additional info
+                    </v-expansion-panel-header>
+                    <v-expansion-panel-content>
+                    </v-expansion-panel-content>
+                  </v-expansion-panel>
+                </v-expansion-panels>
+              </v-col>
             </v-row>
             <v-row>
               <v-col md="6">
-                <p class="subtitle-2">Environment</p>
-                <v-slider
-                  v-model="Troom"
-                  thumb-size="24"
-                  thumb-label="always"
-                  min="0"
-                  max="40"
-                  step="1"
-                  label="Room temperature"
-                >
-                  <template v-slot:prepend>
-                    <v-icon
-                      @click="decrementTroom"
-                    >
-                      mdi-minus
-                    </v-icon>
-                  </template>
-
-                  <template v-slot:append>
-                    <v-icon
-                      @click="incrementTroom"
-                    >
-                      mdi-plus
-                    </v-icon>
-                  </template>
-                </v-slider>
-                <v-slider
-                  v-model="Tbrewing"
-                  thumb-size="24"
-                  thumb-label="always"
-                  min="90"
-                  max="100"
-                  step="1"
-                  label="Brewing temperature"
-                >
-                  <template v-slot:prepend>
-                    <v-icon
-                      @click="decrementTbrewing"
-                    >
-                      mdi-minus
-                    </v-icon>
-                  </template>
-
-                  <template v-slot:append>
-                    <v-icon
-                      @click="incrementTbrewing"
-                    >
-                      mdi-plus
-                    </v-icon>
-                  </template>
-                </v-slider>
-                <p class="subtitle-2">Desired temperature range</p>
-                <v-range-slider
-                  v-model="temperatureRange"
-                  thumb-size="24"
-                  thumb-label
-                  :min="Troom"
-                  :max="Tbrewing"
-                  step="1"
-                ></v-range-slider>
-                <p>Time to reach {{temperatureRange[0]}} ºC: <span class="font-weight-bold">{{time2coffee (temperatureRange[0]).toFixed(2)}} s</span></p>
-                <p>Time to reach {{temperatureRange[1]}} ºC: <span class="font-weight-bold">{{time2coffee (temperatureRange[1]).toFixed(2)}} s</span></p>
-                <p class="subtitle-2">Desired waiting time</p>
-                <v-slider
-                  v-model="waitingTime"
-                  thumb-size="24"
-                  thumb-label
-                  min="0"
-                  max="1200"
-                  step="1"
-                  label="(s)"
-                >
-                  <template v-slot:prepend>
-                    <v-icon
-                      @click="decrementWaitingTime"
-                    >
-                      mdi-minus
-                    </v-icon>
-                  </template>
-
-                  <template v-slot:append>
-                    <v-icon
-                      @click="incrementWaitingTime"
-                    >
-                      mdi-plus
-                    </v-icon>
-                  </template>
-                </v-slider>
-                <p>Temperature: <span class="font-weight-bold">{{ Tcoffee(waitingTime).toFixed(2) }} ºC</span> after {{Math.floor(waitingTime / 60)}} minutes and {{waitingTime-60*Math.floor(waitingTime / 60)}} seconds.</p>
               </v-col>
               <v-col md="6">
-                <p class="subtitle-2">Amount of material</p>
-                <!-- <p>Weight: <span class="font-weight-bold">{{ mugWeight }} g</span> of <span class="font-weight-bold">{{ selectedMaterial }}</span></p> -->
+                <!-- <p class="subtitle-2">Amount of material</p>
+                <p>Weight: <span class="font-weight-bold">{{ mugWeight }} g</span> of <span class="font-weight-bold">{{ selectedMaterial }}</span></p>
                 <p>Score:: <span class="font-weight-bold">{{ 2+2 }}</span></p>
                 <p class="subtitle-2">Recyclability</p>
                 <p>Score:: <span class="font-weight-bold">{{ 2+2 }}</span></p>
                 <p class="subtitle-2">Emissions from manufacturing</p>
-                <p>Score:: <span class="font-weight-bold">{{ 2+2 }}</span></p>
+                <p>Score:: <span class="font-weight-bold">{{ 2+2 }}</span></p> -->
               </v-col>
+            </v-row>
+            <v-row>
+              <h3>Save design</h3>
             </v-row>
             <v-row>
               <v-col md="6">
@@ -369,7 +448,7 @@
                 ></v-text-field>
               </v-col>
               <v-col md="6">
-                <v-btn @click="submitDesign" color="primary" text large>Submit</v-btn>
+                <v-btn @click="submitDesign" color="primary" large>Submit</v-btn>
               </v-col>
             </v-row>
           </v-col>
@@ -408,6 +487,7 @@ import router from '@/router'
   export default {
     components: {
     },
+    props: ['weights'],
     data () {
       return {
         designName: null,
@@ -433,6 +513,8 @@ import router from '@/router'
             thermalConductivity: 3.8, // W/m*K
             fractureToughness: 1.05, // MPa m^1/2
             strenght: 100, // MPa
+            recyclability: 0.65, // https://doi.org/10.1016/S0921-3449(02)00056-3
+            criticality: 0.10,
           },
           {
             text:'Steel',
@@ -446,6 +528,8 @@ import router from '@/router'
             thermalConductivity: 50, // W/m*K
             fractureToughness: 50, // MPa m^1/2
             strenght: 1000, // MPa
+            recyclability: 1.05, // https://doi.org/10.1016/S0921-3449(02)00056-3
+            criticality: 0.30,
           },
           {
             text:'Aluminium',
@@ -459,6 +543,8 @@ import router from '@/router'
             thermalConductivity: 205, // W/m*K
             fractureToughness: 21, // MPa m^1/2
             strenght: 300, // MPa
+            recyclability: 0.85, // https://doi.org/10.1016/S0921-3449(02)00056-3
+            criticality: 0.50,
           },
           {
             text:'Polypropylene',
@@ -472,6 +558,8 @@ import router from '@/router'
             thermalConductivity: 0.11, // W/m*K
             fractureToughness: 3.3, // MPa m^1/2
             strenght: 60, // MPa
+            recyclability: 0.95, // https://doi.org/10.1016/S0921-3449(02)00056-3
+            criticality: 0.70,
           },
           {
             text:'Glass',
@@ -485,6 +573,8 @@ import router from '@/router'
             thermalConductivity: 1.1, // W/m*K
             fractureToughness: 0.75, // MPa m^1/2
             strenght: 1500, // MPa
+            recyclability: 0.72, // https://doi.org/10.1016/S0921-3449(02)00056-3
+            criticality: 0.30,
           },
         ],
         selectedHandle: 'Rounded',
@@ -502,6 +592,14 @@ import router from '@/router'
       }
     },
     computed: {
+      sumWeights () {
+        var sum = 0
+        Object.values(this.weights).forEach(weight => {
+          sum = sum + weight
+        });
+        console.log("Sum of all weights = "+sum)
+        return sum
+      },
       projectId () {
         var projectId = this.$store.getters.project.id
         return projectId
@@ -597,6 +695,24 @@ import router from '@/router'
         }
         var vHandle = (this.handleThickness/2)**2*Math.PI*lHandle;
         return ((v1-v2+vHandle)*this.material['density']).toFixed(2)
+      },
+      performance () {
+        var thermalPerformance = 30 * this.weights.thermalCriterion
+        var volumePerformance = 50 * this.weights.volumeCriterion
+        var weightPerformance= 60 * this.weights.weightCriterion
+        var result = ( thermalPerformance + volumePerformance + weightPerformance ) / this.sumWeights
+        console.log(this.weights.thermalCriterion)
+        return Math.floor(result)
+      },
+      sustainability () {
+        var amountMaterial = 100 * Math.exp(-(this.mugWeight/2000)) * this.weights.amountCriterion
+        var typeMaterial = this.material.recyclability * 100 * this.weights.recyclabilityCriterion
+        var supplyChain = this.material.criticality * 100 * this.weights.supplyCriterion
+        var result = ( amountMaterial + typeMaterial + supplyChain ) / this.sumWeights
+        return Math.floor(result)
+      },
+      total () {
+        return ( this.performance + this.sustainability) / 2
       },
     },
     methods: {
@@ -746,6 +862,9 @@ import router from '@/router'
           creator: this.userName(),
           projectId: this.projectId,
           name: this.designName,
+          sustainability: this.sustainability,
+          performance: this.performance,
+          total: this.total,
         }
         this.overlay = !this.overlay
         this.uploading = true

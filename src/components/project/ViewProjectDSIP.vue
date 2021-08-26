@@ -65,7 +65,6 @@
                               class="mr-4"
                               @click="saveProjectChanges()"
                               :loading="loadingProject"
-                              :disabled=!userIsOwner
                             >
                               Save changes
                             </v-btn>
@@ -96,7 +95,114 @@
         </v-card>
       </v-tab-item>
       <v-tab-item>
-        <Table/>
+        <v-container>
+          <v-row>
+            <Table/>
+          </v-row>
+          <v-row>
+            <v-col cols="6">
+              <v-form>
+                <v-container>
+                  <v-row>
+                    <h2>Performance criteria weights</h2>
+                  </v-row>
+                  <v-row>
+                    <v-slider
+                      v-model="weights.thermalCriterion"
+                      label="Thermal"
+                      max="10"
+                      min="0"
+                      step="1"
+                      ticks="always"
+                      tick-size="4"
+                      :tick-labels="ticksLabels"
+                      color="red"
+                      track-color="red"
+                    ></v-slider>
+                  </v-row>
+                  <v-row>
+                    <v-slider
+                      v-model="weights.volumeCriterion"
+                      label="Volume"
+                      max="10"
+                      min="0"
+                      step="1"
+                      ticks="always"
+                      tick-size="4"
+                      :tick-labels="ticksLabels"
+                      color="pink"
+                      track-color="pink"
+                    ></v-slider>
+                  </v-row>
+                  <v-row>
+                    <v-slider
+                      v-model="weights.weightCriterion"
+                      label="Weight"
+                      max="10"
+                      min="0"
+                      step="1"
+                      ticks="always"
+                      tick-size="4"
+                      :tick-labels="ticksLabels"
+                      color="purple"
+                      track-color="purple"
+                    ></v-slider>
+                  </v-row>
+                  <v-row>
+                    <h2>Sustainability criteria weights</h2>
+                  </v-row>
+                  <v-row>
+                    <v-slider
+                      v-model="weights.amountCriterion"
+                      label="Amount of material"
+                      max="10"
+                      min="0"
+                      step="1"
+                      ticks="always"
+                      tick-size="4"
+                      :tick-labels="ticksLabels"
+                      color="teal"
+                      track-color="teal"
+                    ></v-slider>
+                  </v-row>
+                  <v-row>
+                    <v-slider
+                      v-model="weights.recyclabilityCriterion"
+                      label="Recyclability"
+                      max="10"
+                      min="0"
+                      step="1"
+                      ticks="always"
+                      tick-size="4"
+                      :tick-labels="ticksLabels"
+                      color="green"
+                      track-color="green"
+                    ></v-slider>
+                  </v-row>
+                  <v-row>
+                    <v-slider
+                      v-model="weights.supplyCriterion"
+                      label="Supply Chain Risk"
+                      max="10"
+                      min="0"
+                      step="1"
+                      ticks="always"
+                      tick-size="4"
+                      :tick-labels="ticksLabels"
+                      color="light-green"
+                      track-color="light-green"
+                    ></v-slider>
+                  </v-row>
+                </v-container>
+              </v-form>
+            </v-col>
+            <v-col cols="6">
+              <div id="barChart">
+                <apexchart type="bar" height="500" :options="barChartOptions" :series="barChartSeries"></apexchart>
+              </div>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
@@ -115,103 +221,31 @@
         <v-card flat>
           <v-card-title>Create new design alternative</v-card-title>
           <v-card-text>
-                  <Mug/>
+                  <Mug v-bind:weights="weights"/>
           </v-card-text>
         </v-card>
       </v-tab-item>
       <v-tab-item>
         <v-row>
-<!--           <v-col cols="6">
-            <v-card>
-              <v-card-title>
-                <span class="text-h5">Heatmap</span>
-              </v-card-title>
-
-              <v-card-text>
-                <div id="heatmapChart">
-                  <apexchart type="heatmap" height="400" :options="heatmapChartOptions" :series="series"></apexchart>
-                </div>
-              </v-card-text>
-            </v-card>
-          </v-col> -->
           <v-col cols="6">
-<!--            <v-card>
-              <v-card-title>
-                <span class="text-h5">Radar chart</span>
-              </v-card-title>
-
-              <v-card-text> -->
-                <div id="radarChart">
-                  <apexchart type="radar" height="400" :options="radarChartOptions" :series="series"></apexchart>
-                </div>
-<!--               </v-card-text>
-            </v-card> -->
-          </v-col>
-          <v-col cols="6">
-<!--            <v-card>
-              <v-card-title>
-                <span class="text-h5">Scatter chart</span>
-              </v-card-title>
-
-              <v-card-text> -->
                 <div id="scatterChart">
                   <apexchart type="scatter" height="350" :options="scatterChartOptions" :series="scatterSeries"></apexchart>
                 </div>
-<!--               </v-card-text>
-            </v-card> -->
+          </v-col>
+          <v-col cols="6">
+                <div id="radarChart">
+                  <apexchart type="radar" height="400" :options="radarChartOptions" :series="radarSeries"></apexchart>
+                </div>
           </v-col>
           <v-col cols="12">
-            <v-card
-              max-width="1280"
-              class="mx-auto my-3"
-            >
-              <!-- <v-card-title>Collected designs</v-card-title> -->
-              <v-card-text>
-                <v-simple-table>
-                  <thead>
-                    <tr>
-                      <!-- <th class="text-center">H1</th>
-                      <th class="text-center">D1</th>
-                      <th class="text-center">D2</th>
-                      <th class="text-center">T1</th>
-                      <th class="text-center">T2</th>
-                      <th class="text-center">S1</th> -->
-                      <th class="text-center">Handle</th>
-                      <th class="text-center">Material</th>
-                      <th class="text-center">Volume</th>
-                      <th class="text-center">Weight</th>
-                      <th class="text-center">Timestamp</th>
-                      <th class="text-center">Creator</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="item in designs" :key="item.uuid">
-                      <!-- <td>{{ item.height }}</td>
-                      <td>{{ item.diameterTop }}</td>
-                      <td>{{ item.diameterBottom }}</td>
-                      <td>{{ item.mugThickness }}</td>
-                      <td>{{ item.handleThickness }}</td>
-                      <td>{{ item.handleSeparation }}</td> -->
-                      <td>{{ item.handle }}</td>
-                      <td>{{ item.material }}</td>
-                      <td>{{ item.volume }}</td>
-                      <td>{{ item.weight }}</td>
-                      <td>{{ item.createdOn.seconds }}</td>
-                      <td>{{ item.creator }}</td>
-                    </tr>
-                  </tbody>
-                </v-simple-table>
-              </v-card-text>
-              <v-card-actions>
-                <v-btn
-                  color="green"
-                  text
-                  @click="createMug"
-                >
-                  Create new
-                </v-btn>
-              </v-card-actions>
-            </v-card>
+                  <v-data-table
+                    v-model="selected"
+                    :headers="headers"
+                    :items="designs"
+                    item-key="name"
+                    show-select
+                  >
+                  </v-data-table>
           </v-col>
         </v-row>
       </v-tab-item>
@@ -248,8 +282,29 @@ export default {
   },
   data(){
     return{
+      weights: {
+        thermalCriterion: 5,
+        volumeCriterion: 5,
+        weightCriterion: 5,
+        amountCriterion: 5,
+        recyclabilityCriterion: 5,
+        supplyCriterion: 5,
+      },
+      ticksLabels: [0,1,2,3,4,5,6,7,8,9,10],
       tab: null,
+      selected: [],
       designs: [],
+      headers: [
+        {text: "Design name", value: "name"},
+        {text: "Handle", value: "handle"},
+        {text: "Material", value: "material"},
+        {text: "Volume", value: "volume"},
+        {text: "Weight", value: "weight"},
+        {text: "Performance", value: "performance"},
+        {text: "Sustainability", value: "sustainability"},
+        {text: "Total score", value: "total"},
+        {text: "Creator", value: "creator"},
+      ],
       loadingProject: false,
       snackbarUpdatedProject: false,
       snackbarDeletedProject: false,
@@ -281,24 +336,6 @@ export default {
           }]
         }
       ],
-      scatterSeries: [
-        {
-          name: "Designs",
-          data: [{
-            x: 11,
-            y: 22
-          }, {
-            x: 5,
-            y: 29
-          }, {
-            x: 26,
-            y: 3
-          }, {
-            x: 60,
-            y: 42
-          }]
-        }
-      ],
       heatmapChartOptions: {
         chart: {
           height: 450,
@@ -326,9 +363,9 @@ export default {
         dataLabels: {
           enabled: false
         },
-        yaxis: {
+        xaxis: {
           type: 'category',
-          categories: ['Option 1', 'Option 2', 'Option 3', 'Option 4']
+          categories: ['Performance', 'Sustainability', 'Total']
         },
         grid: {
           padding: {
@@ -374,9 +411,67 @@ export default {
           show: false
         }
       },
+      barChartOptions: {
+        chart: {
+          type: 'bar',
+          height: 350,
+          stacked: true,
+          stackType: '100%'
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+              offsetX: -10,
+              offsetY: 0
+            }
+          }
+        }],
+        xaxis: {
+          categories: ['Thermal','Volume','Weight','Amount of material','Recyclability','Supply chain risk'],
+        },
+        fill: {
+          opacity: 1
+        },
+        legend: {
+          position: 'right',
+          offsetX: 0,
+          offsetY: 50
+        },
+        colors:['#F44336', '#E91E63', '#9C27B0', '#009688', '#4CAF50', '#8BC34A'],
+      },
     }
   },
   computed: {
+    barChartSeries () {
+      return [
+        {
+          name: "Thermal",
+          data: [this.weights.thermalCriterion]
+        },
+        {
+          name: "Volume",
+          data: [this.weights.volumeCriterion]
+        },
+        {
+          name: "Weight",
+          data: [this.weights.weightCriterion]
+        },
+        {
+          name: "Amount of material",
+          data: [this.weights.amountCriterion]
+        },
+        {
+          name: "Recyclability",
+          data: [this.weights.recyclabilityCriterion]
+        },
+        {
+          name: "Supply chain risk",
+          data: [this.weights.supplyCriterion]
+        }
+      ]
+    },
     project () {
       return this.$store.getters.project
     },
@@ -391,6 +486,30 @@ export default {
         //console.log(false)
         return false
       }
+    },
+    radarSeries () {
+      var series = []
+      for (let index = 0; index < this.selected.length; index++) {
+        const element = this.selected[index];
+        series.push(
+        {
+          name: element.name,
+          data: [element.performance,element.sustainability,element.total]
+        })
+      }
+      return series
+    },
+    scatterSeries () {
+      var series = []
+      for (let index = 0; index < this.selected.length; index++) {
+        const element = this.selected[index];
+        series.push(
+        {
+          name: element.name,
+          data: [{x:element.performance,y:element.sustainability,z:element.total}]
+        })
+      }
+      return series
     },
   },
   methods: {
@@ -428,6 +547,7 @@ export default {
         status: this.project.status,
         description: this.project.description,
         shared: this.project.shared,
+        criteria: this.project.criteria,
       }
       db.collection('projects').doc(this.$route.params.id).set(project).then(() => {
         this.loadingProject = false
