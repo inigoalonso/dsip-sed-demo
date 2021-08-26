@@ -36,6 +36,9 @@
           <v-tab>
             Alternatives
           </v-tab>
+          <v-tab>
+            Value
+          </v-tab>
         </v-tabs>
       </template>
     </v-toolbar>
@@ -247,6 +250,19 @@
                     show-select
                   >
                   </v-data-table>
+          </v-col>
+        </v-row>
+      </v-tab-item>
+      <v-tab-item>
+        <v-row>
+          <v-col cols="12">
+            <div class="d-flex flex-column justify-space-between align-center">
+              <v-img
+                max-height="600"
+                max-width="900"
+                src="/surplusValue.png"
+              ></v-img>
+            </div>
           </v-col>
         </v-row>
       </v-tab-item>
